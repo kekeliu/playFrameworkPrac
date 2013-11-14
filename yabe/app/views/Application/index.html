@@ -1,4 +1,26 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-#{welcome /}
+#{if frontPost}
+        <!--调用display模板-->
+	#{display post:frontPost, as:'home' /}
+	
+	#{if olderPosts.size()}
+		<div class="older-posts">
+			<h3>
+				Older posts <span class="form">from this blog</span>
+			</h3>
+			#{list items:olderPosts ,as:'oldPost'}
+                                <!--调用display模板-->
+				#{display post:oldPost, as:'teaser' /}
+			#{/list}
+		</div>
+	#{/if}
+	
+#{/if}
+
+#{else}
+	<div class="empty">
+		There is currently nothing to read here!
+	</div>
+#{/else}
